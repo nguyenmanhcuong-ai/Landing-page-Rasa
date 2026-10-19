@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ShareButton from "@/components/ShareButton";
 import { getVegetable, vegetables } from "@/data/vegetables";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -34,7 +35,110 @@ export default async function VegetablePage({ params }: Props) {
 
   return (
     <article>
-      <section className="leaf-pattern text-white">
+      <div className="bg-[#f7f5ee] lg:hidden">
+        <section className="bg-white">
+          <div className="flex h-16 items-center justify-between border-b border-forest/10 px-4">
+            <Link
+              href="/#rau-cu-nam"
+              className="flex h-11 w-11 items-center justify-start text-2xl text-forest"
+              aria-label="Quay lại thư viện rau nấm"
+            >
+              ←
+            </Link>
+            <div className="text-center">
+              <p className="font-serif text-lg font-semibold leading-tight text-forest">Thư viện rau nấm</p>
+              <p className="mt-0.5 text-[11px] uppercase tracking-[0.14em] text-forest/55">Rasa · Ngon &amp; Lành</p>
+            </div>
+            <ShareButton title={`${veg.name} – Dinh dưỡng & công dụng`} />
+          </div>
+
+          {veg.images[0] && (
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream">
+              <Image
+                src={veg.images[0]}
+                alt={veg.name}
+                fill
+                sizes="100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+          )}
+
+          <div className="px-5 pb-6 pt-5">
+            <div className="flex flex-wrap items-center gap-2">
+              {veg.type && (
+                <span className="rounded-full bg-[#e8efdf] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-forest">
+                  {veg.type === "Rau" ? "Rau xanh" : veg.type}
+                </span>
+              )}
+              <span className="text-xs text-forest/55">{String(index + 1).padStart(2, "0")}</span>
+            </div>
+
+            <h1 className="mt-4 font-serif text-3xl font-semibold leading-tight text-forest">{veg.name}</h1>
+            {veg.scientificName && (
+              <p className="mt-2 text-sm leading-relaxed text-forest/60">
+                <strong className="font-semibold not-italic text-forest/75">Tên khoa học/Nhóm: </strong>
+                <span className="italic">{veg.scientificName}</span>
+                {veg.family && ` · ${veg.family}`}
+              </p>
+            )}
+            {veg.description && <p className="mt-4 leading-relaxed text-forest/80">{veg.description}</p>}
+
+            <div className="my-6 h-px bg-forest/15" />
+            <h2 className="font-serif text-2xl font-semibold text-forest">Giá trị dinh dưỡng</h2>
+          </div>
+        </section>
+
+        {hasContent ? (
+          <section className="bg-white px-5 pb-8">
+            {veg.nutrients && (
+              <MobileSection number="1" title="Dinh dưỡng nổi bật">
+                <p>{veg.nutrients}</p>
+              </MobileSection>
+            )}
+
+            {veg.benefits?.length ? (
+              <MobileSection number="2" title="Công dụng">
+                <ul className="space-y-3">
+                  {veg.benefits.map((benefit, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-sand-600" aria-hidden />
+                      <p>
+                        {benefit.title && <strong className="font-semibold text-forest">{benefit.title}: </strong>}
+                        {benefit.text}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </MobileSection>
+            ) : null}
+
+            {veg.suitableFor && (
+              <MobileSection number="3" title="Phù hợp với">
+                <p>{veg.suitableFor}</p>
+              </MobileSection>
+            )}
+
+            {veg.notes && (
+              <MobileSection number="4" title="Lưu ý" last>
+                <p>{veg.notes}</p>
+              </MobileSection>
+            )}
+          </section>
+        ) : (
+          <p className="bg-white px-5 pb-12 text-forest/60">
+            Thông tin dinh dưỡng của {veg.name.toLowerCase()} đang được cập nhật.
+          </p>
+        )}
+
+        <nav className="grid grid-cols-2 gap-2 border-t border-sand bg-cream px-4 py-6">
+          {prev ? <PagerLink veg={prev} label="← Trước" /> : <span />}
+          {next && <PagerLink veg={next} label="Tiếp theo →" align="right" />}
+        </nav>
+      </div>
+
+      <section className="leaf-pattern hidden text-white lg:block">
         <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 pb-10 pt-4 sm:gap-10 sm:px-6 sm:py-14 md:py-20 lg:grid-cols-[1.1fr_1fr]">
           <Link
             href="/#rau-cu-nam"
@@ -53,7 +157,10 @@ export default async function VegetablePage({ params }: Props) {
             </p>
             <h1 className="mt-1 font-serif text-[2.25rem] leading-tight sm:mt-2 sm:text-5xl lg:text-6xl">{veg.name}</h1>
             {veg.scientificName && (
-              <p className="mt-2 text-base italic text-white/70 sm:mt-3 sm:text-lg">{veg.scientificName}</p>
+              <p className="mt-2 text-base text-white/70 sm:mt-3 sm:text-lg">
+                <strong className="font-semibold not-italic text-white/90">Tên khoa học/Nhóm: </strong>
+                <span className="italic">{veg.scientificName}</span>
+              </p>
             )}
             {veg.family && <p className="mt-1 text-sm text-white/50">{veg.family}</p>}
             {veg.nutrientTags?.length ? (
@@ -89,7 +196,7 @@ export default async function VegetablePage({ params }: Props) {
         </div>
       </section>
 
-      <section className="bg-cream py-8 sm:py-16 md:py-24">
+      <section className="hidden bg-cream py-24 lg:block">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           {hasContent ? (
             <div className="grid gap-4 sm:gap-8 lg:grid-cols-3">
@@ -160,6 +267,27 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
       <h2 className="mb-3 font-serif text-xl text-forest sm:mb-4 sm:text-2xl">{title}</h2>
       {children}
     </div>
+  );
+}
+
+function MobileSection({
+  number,
+  title,
+  children,
+  last,
+}: {
+  number: string;
+  title: string;
+  children: React.ReactNode;
+  last?: boolean;
+}) {
+  return (
+    <section className={`py-7 ${last ? "" : "border-b border-forest/15"}`}>
+      <h2 className="font-serif text-xl font-semibold text-forest">
+        {number}. {title}
+      </h2>
+      <div className="mt-4 text-[15px] leading-7 text-forest/75">{children}</div>
+    </section>
   );
 }
 
