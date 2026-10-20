@@ -50,7 +50,7 @@ export default function VegetableExplorer({ items }: { items: Vegetable[] }) {
   return (
     <div>
       <div className="mb-5 md:hidden">
-        <h2 className="font-serif text-2xl font-semibold text-forest">Danh mục thực phẩm</h2>
+        <h2 className="text-center font-serif text-2xl font-semibold text-forest">Danh mục thực phẩm</h2>
         <div
           className="mt-4 flex flex-wrap gap-2"
           role="tablist"

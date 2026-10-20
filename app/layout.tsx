@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Be_Vietnam_Pro, Playfair_Display } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -8,12 +8,6 @@ const body = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
-  display: "swap",
-});
-
-const display = Playfair_Display({
-  subsets: ["latin", "vietnamese"],
-  variable: "--font-display",
   display: "swap",
 });
 
@@ -36,7 +30,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={`${body.variable} ${display.variable}`}>
+    <html lang="vi" className={body.variable}>
       <body className="font-sans">
         <Header />
         <main>{children}</main>
