@@ -72,6 +72,99 @@ export const vegetables: Vegetable[] = [
     suitableFor: "Người cần bổ sung chất xơ, người thích món gỏi, bún.",
     notes: "Vị chát, ăn nhiều có thể gây đầy bụng, táo bón ở một số người.",
   },
+  {
+    slug: "cai-xanh",
+    name: "Cải xanh",
+    images: ["/images/cai-xanh/cai-xanh-1.webp", "/images/cai-xanh/cai-xanh-2.webp"],
+    type: "Rau",
+    scientificName: "Brassica juncea – cải bẹ xanh",
+    family: "Họ Cải",
+    description:
+      "Bẹ và lá to, xanh đậm, vị cay nồng nhẹ (do isothiocyanate). Dùng nấu canh, xào, muối dưa.",
+    nutrientTags: ["Vitamin A", "Vitamin C", "Vitamin K", "Folate", "Canxi"],
+    nutrients: "Vitamin A (carotenoid), C, K, folate, canxi.",
+    benefits: [
+      { title: "Vitamin A", text: "tốt cho mắt, da và niêm mạc." },
+      { title: "Vitamin C và chất chống oxy hóa", text: "hỗ trợ đề kháng." },
+      {
+        title: "Vitamin K, canxi",
+        text: "góp phần cho xương chắc khỏe và đông máu bình thường.",
+      },
+      {
+        text: "Vị cay nhẹ kích thích tiêu hóa; dân gian dùng hỗ trợ long đờm, giảm ho.",
+      },
+    ],
+    suitableFor: "Người muốn tăng lượng rau xanh đậm; ăn kèm lẩu, đồ nướng.",
+    notes:
+      "Nhiều vitamin K – người dùng warfarin cần lưu ý. Cải muối chua có nhiều natri, người cao huyết áp nên hạn chế.",
+  },
+  {
+    slug: "cai-be-xanh-con",
+    name: "Cải bẹ xanh con",
+    images: [
+      "/images/cai-be-xanh-con/cai-be-xanh-non-1.jpg",
+      "/images/cai-be-xanh-con/cai-be-xanh-non-2.jpg",
+    ],
+    type: "Rau",
+    scientificName: "Brassica juncea, thu hoạch khi còn non",
+    family: "Họ Cải",
+    description:
+      "Cây nhỏ, lá mềm, ít cay và ít xơ hơn cải bẹ xanh trưởng thành; phù hợp nấu canh, xào nhanh.",
+    nutrientTags: ["Vitamin A", "Vitamin C", "Vitamin K", "Folate", "Chất xơ"],
+    nutrients:
+      "Tương tự cải xanh: vitamin A, C, K, folate; hàm lượng chất xơ thấp hơn cải già.",
+    benefits: [
+      { title: "Cung cấp vitamin A, C", text: "hỗ trợ mắt, da và miễn dịch." },
+      { title: "Mềm, ít cay, ít xơ", text: "dễ nhai, dễ tiêu." },
+      { text: "Chất xơ nhẹ nhàng giúp nhuận tràng." },
+      { text: "Bổ sung khoáng chất và chất chống oxy hóa cho bữa ăn." },
+    ],
+    suitableFor: "Trẻ em, người lớn tuổi, người mới tập ăn rau cải.",
+    notes: "Như cải xanh (vitamin K với người dùng warfarin).",
+  },
+  {
+    slug: "cai-ngong",
+    name: "Cải ngồng",
+    images: ["/images/cai-ngong/cai-ngong-1.jpg", "/images/cai-ngong/cai-ngong-2.jpg"],
+    type: "Rau",
+    scientificName:
+      "Rau họ Cải trổ ngồng, thường là cải ngọt/cải bẹ (Brassica rapa var. parachinensis)",
+    description:
+      "Phần ăn là thân hoa non (ngồng) mọc cao, có nụ hoặc hoa vàng nhỏ, giòn, vị ngọt nhẹ, ít xơ khi còn non.",
+    nutrientTags: ["Vitamin C", "Vitamin A", "Vitamin K", "Folate", "Canxi"],
+    nutrients: "Vitamin C, A, K, folate, canxi.",
+    benefits: [
+      {
+        title: "Folate",
+        text: "cần cho phụ nữ chuẩn bị mang thai và đang mang thai (trong chế độ ăn đa dạng).",
+      },
+      { title: "Vitamin C, K, canxi", text: "hỗ trợ đề kháng, xương." },
+      { text: "Chất xơ giúp tiêu hóa, giữ cảm giác no." },
+      { text: "Ngồng non giòn ngọt, ít xơ, dễ ăn." },
+    ],
+    suitableFor: "Phụ nữ mang thai, người cần bổ sung khoáng chất.",
+    notes: "Chọn ngồng non; ngồng già nhiều xơ. Người dùng warfarin lưu ý vitamin K.",
+  },
+  {
+    slug: "cai-thia",
+    name: "Cải thìa",
+    images: ["/images/cai-thia/cai-thia-1.jpg", "/images/cai-thia/cai-thia-2.jpg"],
+    type: "Rau",
+    scientificName: "Brassica rapa subsp. chinensis – bok choy",
+    family: "Họ Cải",
+    description:
+      "Bẹ trắng mập, lá xanh đậm, giòn, vị ngọt thanh, ít cay. Dùng xào, nấu canh, nhúng lẩu.",
+    nutrientTags: ["Vitamin A", "Vitamin C", "Vitamin K", "Canxi", "Folate", "Ít calo"],
+    nutrients: "Vitamin A, C, K, canxi, folate; ít calo.",
+    benefits: [
+      { title: "Canxi hấp thu khá tốt (ít oxalat)", text: "hỗ trợ xương và răng." },
+      { title: "Vitamin A, C, K", text: "tốt cho mắt, đề kháng và đông máu." },
+      { text: "Ít calo, giòn ngọt, tạo cảm giác no nhẹ." },
+      { text: "Chất chống oxy hóa đặc trưng của rau họ Cải." },
+    ],
+    suitableFor: "Người cần bổ sung canxi từ thực vật, người ăn kiêng.",
+    notes: "Người dùng warfarin lưu ý vitamin K.",
+  },
 ];
 
 export function getVegetable(slug: string) {
