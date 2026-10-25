@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import VegetableExplorer from "@/components/VegetableExplorer";
+import { branches, branchMapUrl } from "@/data/branches";
 import { vegetables } from "@/data/vegetables";
 
 const guide = [
@@ -25,8 +26,6 @@ const brandTraits = [
 ];
 
 export default function Home() {
-  const heroImages = vegetables.flatMap((v) => v.images.slice(0, 1)).slice(0, 2);
-
   return (
     <>
       {/* Hero */}
@@ -44,16 +43,6 @@ export default function Home() {
               lưu ý cần biết để chọn món phù hợp với cơ thể bạn.
             </p>
 
-            {heroImages.length > 0 && (
-              <div className="mt-8 flex items-center gap-3 lg:hidden">
-                {heroImages.map((src) => (
-                  <div key={src} className="relative h-24 flex-1 overflow-hidden rounded-2xl ring-2 ring-white/10 sm:h-36">
-                    <Image src={src} alt="" fill sizes="50vw" className="object-cover" priority />
-                  </div>
-                ))}
-              </div>
-            )}
-
             <div className="mt-8 grid gap-3 sm:mt-10 sm:flex sm:flex-wrap sm:gap-4">
               <Link
                 href="#rau-cu-nam"
@@ -70,19 +59,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mx-auto hidden aspect-square w-full max-w-lg lg:block">
+          <div className="relative mx-auto hidden h-72 w-72 lg:block">
             <div className="absolute inset-0 rounded-full border border-sand/20" />
-            <div className="absolute inset-10 rounded-full border border-sand/10" />
-            {heroImages[0] && (
-              <div className="absolute left-0 top-6 h-72 w-60 overflow-hidden rounded-[2rem] shadow-2xl ring-4 ring-white/10">
-                <Image src={heroImages[0]} alt="" fill sizes="240px" className="object-cover" priority />
-              </div>
-            )}
-            {heroImages[1] && (
-              <div className="absolute bottom-6 right-0 h-72 w-60 overflow-hidden rounded-[2rem] shadow-2xl ring-4 ring-white/10">
-                <Image src={heroImages[1]} alt="" fill sizes="240px" className="object-cover" priority />
-              </div>
-            )}
+            <div className="absolute inset-8 rounded-full border border-sand/10" />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full shadow-2xl ring-8 ring-forest">
               <Image src="/logo.jpg" alt="Rasa" width={447} height={447} className="h-36 w-36" />
             </div>
@@ -91,17 +70,17 @@ export default function Home() {
       </section>
 
       {/* Danh mục */}
-      <section id="rau-cu-nam" className="render-lazy scroll-mt-20 bg-cream py-7 sm:py-20 md:py-28">
-        <RevealOnScroll className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section id="rau-cu-nam" className="scroll-mt-20 bg-cream py-7 sm:py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="hidden md:block">
             <SectionHeading eyebrow="Thư viện nguyên liệu" title="Rau, củ & nấm tại Rasa" />
           </div>
           <VegetableExplorer items={vegetables} />
-        </RevealOnScroll>
+        </div>
       </section>
 
       {/* Hướng dẫn */}
-      <section id="cach-doc" className="leaf-pattern render-lazy scroll-mt-20 py-20 text-white md:py-28">
+      <section id="cach-doc" className="leaf-pattern scroll-mt-20 py-20 text-white md:py-28">
         <RevealOnScroll className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionHeading eyebrow="Cách đọc thông tin" title="Mỗi nguyên liệu, bốn góc nhìn" dark />
           <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
@@ -122,7 +101,7 @@ export default function Home() {
       </section>
 
       {/* Về Rasa */}
-      <section id="ve-rasa" className="render-lazy scroll-mt-20 overflow-hidden bg-cream">
+      <section id="ve-rasa" className="scroll-mt-20 overflow-hidden bg-cream">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:py-28">
           <RevealOnScroll>
             <div className="mx-auto max-w-4xl text-center">
@@ -286,6 +265,36 @@ export default function Home() {
               </a>
             </div>
           </RevealOnScroll>
+        </div>
+      </section>
+
+      <section id="chi-nhanh" className="scroll-mt-20 bg-cream px-4 pb-16 sm:px-6 sm:pb-20 md:pb-28">
+        <div className="mx-auto max-w-7xl">
+          <article className="rounded-3xl border border-forest/10 bg-white px-5 py-8 shadow-sm sm:px-10 sm:py-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sand-600">Nhà hàng</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-forest sm:text-5xl">
+              Hệ Thống 7 Chi Nhánh
+            </h2>
+            <ul className="mt-8 divide-y divide-forest/10">
+              {branches.map((branch) => (
+                <li key={branch.name} className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+                  <div>
+                    <h3 className="text-lg font-semibold text-forest sm:text-xl">{branch.name}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-forest/75 sm:text-base">{branch.address}</p>
+                    <p className="mt-1 text-sm text-forest/60">{branch.hours}</p>
+                  </div>
+                  <a
+                    href={branchMapUrl(branch)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-forest/20 px-5 py-2.5 text-sm font-semibold text-forest transition hover:border-forest hover:bg-forest hover:text-white"
+                  >
+                    Bản đồ
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
         </div>
       </section>
     </>

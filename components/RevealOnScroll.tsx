@@ -16,18 +16,40 @@ export default function RevealOnScroll({
     const element = ref.current;
     if (!element) return;
 
+    const inView = () => {
+      const rect = element.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    };
+
+    const reveal = () => setVisible(true);
+
+    if (inView()) {
+      reveal();
+      return;
+    }
+
+    const onScroll = () => {
+      if (!inView()) return;
+      reveal();
+      window.removeEventListener("scroll", onScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(element);
-        }
+        if (!entry.isIntersecting) return;
+        reveal();
+        observer.disconnect();
+        window.removeEventListener("scroll", onScroll);
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { threshold: 0 },
     );
 
     observer.observe(element);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (

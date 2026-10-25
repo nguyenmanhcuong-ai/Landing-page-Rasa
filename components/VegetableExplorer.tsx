@@ -7,7 +7,7 @@ import VegetableCard from "./VegetableCard";
 const ALL = "Tất cả";
 
 const mobileCategories = [
-  { label: "Tất cả 60+", value: ALL },
+  { label: "Tất cả", value: ALL },
   { label: "Rau xanh", value: "Rau" },
   { label: "Nấm", value: "Nấm" },
   { label: "Củ quả", value: "Củ" },
@@ -124,7 +124,7 @@ export default function VegetableExplorer({ items }: { items: Vegetable[] }) {
 
       <div className="mb-4 flex items-end justify-between md:hidden">
         <h3 className="font-serif text-xl font-semibold text-forest">Các loại rau nấm</h3>
-        <span className="text-sm text-forest/60">60+ thực phẩm</span>
+        <span className="text-sm text-forest/60">{results.length} thực phẩm</span>
       </div>
 
       {results.length ? (
@@ -138,17 +138,6 @@ export default function VegetableExplorer({ items }: { items: Vegetable[] }) {
           Không tìm thấy loại rau củ nấm phù hợp.
         </p>
       )}
-
-      <button
-        type="button"
-        onClick={() => {
-          setType(ALL);
-          setQuery("");
-        }}
-        className="mt-4 flex w-full items-center justify-center rounded-xl border border-forest/25 bg-transparent px-5 py-4 font-semibold text-forest transition active:bg-white md:hidden"
-      >
-        Xem tất cả rau củ nấm <span className="ml-2">→</span>
-      </button>
     </div>
   );
 }

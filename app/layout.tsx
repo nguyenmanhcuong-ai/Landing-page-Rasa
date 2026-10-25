@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MushroomIcon from "@/components/MushroomIcon";
 import "./globals.css";
 
 const body = Be_Vietnam_Pro({
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <MushroomIcon />
       </body>
     </html>
   );

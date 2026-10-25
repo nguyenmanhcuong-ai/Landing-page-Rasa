@@ -8,6 +8,7 @@ const nav = [
   { href: "/#rau-cu-nam", label: "Rau củ nấm" },
   { href: "/#cach-doc", label: "Cách đọc thông tin" },
   { href: "/#ve-rasa", label: "Về Rasa" },
+  { href: "/#chi-nhanh", label: "Hệ Thống 7 Chi Nhánh" },
 ];
 
 export default function Header() {
@@ -34,7 +35,7 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm font-medium text-white/80 md:flex">
+        <nav className="hidden items-center gap-5 text-sm font-medium text-white/80 lg:flex xl:gap-8">
           {nav.map((item) => (
             <Link key={item.href} href={item.href} className="transition hover:text-sand">
               {item.label}
@@ -56,7 +57,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Đóng menu" : "Mở menu"}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition hover:bg-white/10 md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition hover:bg-white/10 lg:hidden"
           >
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               {open ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
@@ -67,7 +68,7 @@ export default function Header() {
 
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 bottom-0 top-16 bg-forest transition md:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-16 bg-forest transition lg:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
